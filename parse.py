@@ -1,3 +1,5 @@
+from colors import PrintColors as c
+
 
 class Map:
 
@@ -9,7 +11,23 @@ class Map:
         self.heigth: int = 0
 
     def add_zone(self, zone):
-        self.zones[zone.name] = zone
+        self.zones[zone.coord] = zone
+
+    def show_map(self):
+        for y in range(self.heigth):
+            print()
+            for x in range(self.width):
+                if (x,y) in self.zones.keys():
+                    if self.zones[(x, y)].zone_type == "priority":
+                        c.print_green(f"({x}, {y})")
+                    elif self.zones[(x, y)].zone_type == "restricted":
+                        c.print_yellow(f"({x}, {y})")
+                    elif self.zones[(x, y)].zone_type == "blocked":
+                        c.print_red(f"({x}, {y})")
+                    else:
+                        print(f"({x}, {y})", end=' ')
+                else:
+                    print("      ", end=' ')
 
 
 class Zone:
@@ -18,6 +36,7 @@ class Zone:
         self.name = name
         self.x = x
         self.y = y
+        self.coord = (x, y)
         self.color = color
         self.zone_type = zone_type
         self.max_drones = max_drones
@@ -60,4 +79,3 @@ def parse_map(map, map_name):
                     
     map.width = max(z.x for z in map.zones.values()) + 1
     map.heigth = max(z.y for z in map.zones.values()) + 1
-    print(map.width, map.heigth)

@@ -1,5 +1,12 @@
 import pygame
 
+
+class TerminalOutput:
+
+    def __init__(self, map):
+        pass
+
+
 class Screen:
 
     def __init__(self, map):
