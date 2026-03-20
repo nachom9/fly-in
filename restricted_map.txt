@@ -1,0 +1,29 @@
+nb_drones: 3
+
+start_hub: start 0 0 [color=green max_drones=3]
+
+# Camino normal (5 pasos, coste total = 5)
+hub: n1 1 0 [color=blue]
+hub: n2 2 0 [color=blue]
+hub: n3 3 0 [color=blue]
+hub: n4 4 0 [color=blue]
+
+# Camino restricted (4 pasos, coste total = 8)
+hub: r1 1 1 [zone=restricted color=orange]
+hub: r2 2 1 [zone=restricted color=orange]
+hub: r3 3 1 [zone=restricted color=orange]
+
+end_hub: goal 5 0 [color=green max_drones=3]
+
+# Conexiones camino normal
+connection: start-n1
+connection: n1-n2
+connection: n2-n3
+connection: n3-n4
+connection: n4-goal
+
+# Conexiones camino restricted
+connection: start-r1
+connection: r1-r2
+connection: r2-r3
+connection: r3-goal

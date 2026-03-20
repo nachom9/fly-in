@@ -50,6 +50,10 @@ def parse_map(map, map_name):
                     metadata = value.split('[')[1]
                     zone = Zone.process_metadata(data[0], int(data[1]), int(data[2]), metadata)
                     map.add_zone(zone)
+                    if key == 'start_hub':
+                        map.start = zone
+                    elif key == 'end_hub':
+                        map.end = zone
                 elif key == 'connection':
                     if '[' in value:
                         zones, metadata = value.split('[', 1)

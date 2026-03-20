@@ -42,11 +42,41 @@ class Map:
                 return True
 
     def shortest_path(self):
-        
+        parents = {}
+        path = []
+        queue = [(0, self.start)]
+        visited = set([self.start])
+
+        while queue:
+            min_index = min(range(len(queue)), key=lambda index: queue[index][0])
+            cost, zone = queue.pop(min_index)
+            if zone == self.end:
+                break
+            for next_zone in self.connections.get(zone.name, {}):
+                if next_zone not in visited:
+                    if self.n_zones[next_zone].zone_type == 'restricted':
+                        next_cost = 2
+                    else:
+                        next_cost = 1
+                    queue.append((next_cost + cost, self.n_zones[next_zone]))
+                    visited.add(next_zone)
+                    parents[next_zone] = zone
+
+        current = self.end
+        try:
+            while current != self.start:
+                path.append(current.name)
+                current = parents[current.name]
+        except KeyError:
+            print("No solution.")
+            exit(1)
+
+        return path[::-1]
+
 
     def can_move(self, zone):
         capacity = 0
-        prox = [(z, c) for (z, c) in self.connections[zone.name].items() if self.has_exit(self.n_zones[z])]
+        prox = [z for z in self.connections[zone.name].keys() if self.has_exit(self.n_zones[z])]
         for con in prox:
             capacity += self.n_zones[con].max_drones - len(self.n_zones[con].drones)
         return capacity > 0
