@@ -14,7 +14,7 @@ class Zone:
 
 
     @classmethod
-    def process_metadata(cls, name, x, y, metadata):
+    def process_metadata(cls, name, x, y, metadata, map):
         zone_type = 'normal'
         drones = {}
         i = 1
@@ -30,11 +30,9 @@ class Zone:
             elif key == 'max_drones':
                 max_drones = int(value)
         if name == 'start':
-            for drone in range(max_drones):
+            for drone in range(map.drones):
                 drones[f'D{i}'] = True
                 i += 1
-        else:
-            drones = {}
 
         return cls(name, x, y, color, zone_type, max_drones, drones)
 
@@ -48,7 +46,7 @@ def parse_map(map, map_name):
                 if key in ('hub', 'start_hub', 'end_hub'):
                     data = value.split()
                     metadata = value.split('[')[1]
-                    zone = Zone.process_metadata(data[0], int(data[1]), int(data[2]), metadata)
+                    zone = Zone.process_metadata(data[0], int(data[1]), int(data[2]), metadata, map)
                     map.add_zone(zone)
                     if key == 'start_hub':
                         map.start = zone

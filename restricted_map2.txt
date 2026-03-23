@@ -1,0 +1,46 @@
+nb_drones: 1
+
+start_hub: start 0 0 [color=green max_drones=5]
+
+# CAMINO 1 (corto pero caro por restricted sueltos)
+hub: c1_a 1 0 [zone=restricted color=orange]
+hub: c1_b 2 0 [color=blue]
+hub: c1_c 3 0 [zone=restricted color=orange]
+hub: c1_d 4 0 [color=blue]
+
+# CAMINO 2 (más largo pero barato → debería ganar)
+hub: c2_a 1 1 [color=blue]
+hub: c2_b 2 1 [color=blue]
+hub: c2_c 3 1 [color=blue]
+hub: c2_d 4 1 [color=blue]
+hub: c2_e 5 1 [color=blue]
+
+# CAMINO 3 (intermedio con algún restricted)
+hub: c3_a 1 2 [color=blue]
+hub: c3_b 2 2 [zone=restricted color=orange]
+hub: c3_c 3 2 [color=blue]
+hub: c3_d 4 2 [color=blue]
+
+end_hub: goal 6 1 [color=green max_drones=5]
+
+# Conexiones CAMINO 1
+connection: start-c1_a
+connection: c1_a-c1_b
+connection: c1_b-c1_c
+connection: c1_c-c1_d
+connection: c1_d-goal
+
+# Conexiones CAMINO 2
+connection: start-c2_a
+connection: c2_a-c2_b
+connection: c2_b-c2_c
+connection: c2_c-c2_d
+connection: c2_d-c2_e
+connection: c2_e-goal
+
+# Conexiones CAMINO 3
+connection: start-c3_a
+connection: c3_a-c3_b
+connection: c3_b-c3_c
+connection: c3_c-c3_d
+connection: c3_d-goal

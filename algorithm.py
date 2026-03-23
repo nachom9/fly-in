@@ -10,6 +10,7 @@ class Map:
         self.drones: int = 0
         self.width: int = 0
         self.heigth: int = 0
+        self.path = []
 
     def add_zone(self, zone):
         self.zones[zone.coord] = zone
@@ -50,6 +51,7 @@ class Map:
         while queue:
             min_index = min(range(len(queue)), key=lambda index: queue[index][0])
             cost, zone = queue.pop(min_index)
+            cost += len(zone.drones)
             if zone == self.end:
                 break
             for next_zone in self.connections.get(zone.name, {}):
@@ -65,11 +67,12 @@ class Map:
         current = self.end
         try:
             while current != self.start:
-                path.append(current.name)
+                path.append(current)
                 current = parents[current.name]
         except KeyError:
             print("No solution.")
             exit(1)
+        path.append(self.start)
 
         return path[::-1]
 
@@ -91,19 +94,17 @@ class Map:
 
 
     def empty_zone(self, zone):
-        prox = self.connections[zone.name]
+        prox = self.path[self.path.index(zone) + 1]
         for drone in zone.drones.keys():
             if zone.drones[drone] == False:
                 zone.drones[drone] = True
                 continue
-            for z in prox:
-                if (len(self.n_zones[z].drones) < self.n_zones[z].max_drones
-                    and self.has_exit(self.n_zones[z])):
-                    self.move_drone(zone, self.n_zones[z], drone)
-                    return
+            if len(prox.drones) < prox.max_drones:
+                self.move_drone(zone, prox, drone)
+                return
 
     def turn(self):
-        occ_zones = [z for z in self.zones.values() if len(z.drones) > 0 and 'goal' not in z.name][::-1]
+        occ_zones = [z for z in self.path if len(z.drones) > 0 and 'goal' not in z.name]
         for z in occ_zones:
             if self.can_move(z) and len(z.drones) > 0:
                 self.empty_zone(z)
