@@ -31,9 +31,19 @@ debug: install
 	@echo "Running Fly-In Simulator in debug mode..."
 	$(PYTHON) -m pdb $(MAIN_FILE)
 
+lint:
+	@echo "Running flake8 and mypy..."
+	@$(VENV)/bin/flake8 .
+	@$(VENV)/bin/mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+
+lint-strict:
+	@echo "Running strict lint..."
+	@$(VENV)/bin/flake8 .
+	@$(VENV)/bin/mypy . --strict
+
 clean:
 	@echo "Cleaning temporary files and virtual environment..."
 	@rm -rf __pycache__ .mypy_cache
 	@rm -rf $(VENV)
 
-.PHONY: all banner install run debug clean
+.PHONY: all banner install run debug clean lint lint-strict
