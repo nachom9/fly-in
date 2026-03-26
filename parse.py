@@ -1,5 +1,25 @@
 from algorithm import Map
 
+class MapParseError(Exception):
+    pass
+
+
+class InvalidConnectionError(MapParseError):
+    pass
+
+
+class ZoneNotFoundError(MapParseError):
+    pass
+
+
+class InvalidDroneNumberError(MapParseError):
+    pass
+
+
+class MetadataError(MapParseError):
+    pass
+
+
 class Zone:
 
     def __init__(self, name, x, y, color, zone_type, max_drones, drones):
@@ -17,18 +37,28 @@ class Zone:
     def process_metadata(cls, name, x, y, metadata, map):
         zone_type = 'normal'
         drones = {}
-        i = 1
         max_drones = 1
         color = None
-        data = metadata.split()
-        for item in data:
-            key, value = item.strip('[]').split('=')
-            if key == 'color':
-                color = value
-            elif key == 'zone':
-                zone_type = value
-            elif key == 'max_drones':
-                max_drones = int(value)
+        if metadata:
+            data = metadata.split()
+            for item in data:
+                key, value = item.strip('[]').split('=')
+                if key == 'color':
+                    color = value
+                elif key == 'zone':
+                    zone_type = value
+                elif key == 'max_drones':
+                    max_drones = int(value)
+
+            if zone_type == 'blocked':
+                max_drones = 0
+        
+        if len(color.split()) > 1:
+            raise ValueError
+        if zone_type not in ['normal', 'blocked', 'restricted', 'priority']:
+            raise MetadataError(f"Unknown zone type: '{zone_type}'")
+        if max_drones <= 0 and zone_type != 'blocked':
+            raise InvalidDroneNumberError(f"Max drones must be at least 1")
 
         return cls(name, x, y, color, zone_type, max_drones, drones)
 
@@ -41,7 +71,14 @@ def parse_map(map, map_name):
                 key, value = [x.strip() for x in line.split(':', 1)]
                 if key in ('hub', 'start_hub', 'end_hub'):
                     data = value.split()
-                    metadata = value.split('[')[1]
+                    if '[' in line and ']' in line:
+                        metadata = value.split('[')[1]
+                        if len(data) != 3 + len(metadata.split()):
+                            raise ValueError
+                    else:
+                        metadata = None
+                        if len(data) != 3:
+                            raise ValueError
                     zone = Zone.process_metadata(data[0], int(data[1]), int(data[2]), metadata, map)
                     map.add_zone(zone)
                     if key == 'start_hub':
@@ -61,13 +98,21 @@ def parse_map(map, map_name):
                     else:
                         zone_a, zone_b = value.strip().split('-')
                         max_link = 1
-                    map.connections.setdefault(zone_a, {})[zone_b] = max_link
-
+                    if zone_a in map.n_zones and zone_b in map.n_zones:
+                        map.connections.setdefault(zone_a, {})[zone_b] = max_link
+                    else:
+                        if not map.start or not map.end:
+                            raise ZoneNotFoundError("Map must have both start and end zones.")
+                        raise InvalidConnectionError(f"Connection {zone_a}-{zone_b} not possible")
+                    if max_link < 1:
+                        raise InvalidConnectionError("Max link must be at least 1")
                 elif key == 'nb_drones':
                     map.drones = int(value)
-    for zo, con in map.connections.items():
-        for z in list(con.keys()):
-            if z not in map.n_zones:
-                map.connections[zo].pop(z)
-    map.width = max(z.x for z in map.zones.values()) + 1
-    map.heigth = max(z.y for z in map.zones.values()) + 1
+                elif line[0] != '#':
+                    raise ValueError
+
+    if not map.connections or not map.n_zones:
+        raise ValueError
+
+    if not map.drones or map.drones <= 0:
+        raise InvalidDroneNumberError("Map must have at least 1 drone")

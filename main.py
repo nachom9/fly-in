@@ -1,17 +1,29 @@
 #!/usr/bin/env python3
 
-#import pprint
-from parse import Map, parse_map
+from parse import Map, parse_map, MapParseError
 from show import Screen, TerminalOutput
 
 def main():
     map = Map()
-    parse_map(map, "challenger_map.txt")
-    turns = 0
-    map.path = map.shortest_path(map.start)
+    try:
+        parse_map(map, "wrong_map.txt")
+    except MapParseError as e:
+        print(f"Error. {e}")
+        exit(1)
+    except ValueError:
+        print("Error. Invalid map format")
+        exit(1)
+    except FileNotFoundError as e:
+        print(f"Error. {e}")
+        exit(1)
+    try:
+        map.path = map.shortest_path(map.start)
+    except KeyError:
+        print("Error. No solution")
+        exit(1)
     while len(map.end.drones) < map.drones:
         map.turn()
-        turns += 1
+
 
 if __name__ == "__main__":
     main()

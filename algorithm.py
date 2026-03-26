@@ -1,6 +1,3 @@
-from colors import PrintColors as c
-
-
 class Map:
 
     def __init__(self):
@@ -9,9 +6,9 @@ class Map:
         self.r_zones = {}
         self.connections = {}
         self.drones: int = 0
-        self.width: int = 0
-        self.heigth: int = 0
         self.path = []
+        self.start = None
+        self.end = None
 
     def add_zone(self, zone):
         self.zones[zone.coord] = zone
@@ -75,6 +72,8 @@ class Map:
                 path.append(current)
                 current = parents[current.name]
         except KeyError:
+            if start == self.start:
+                raise KeyError
             return
         path.append(start)
 
