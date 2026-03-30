@@ -5,7 +5,7 @@ from parse import Map, parse_map, MapParseError
 def main():
     map = Map()
     try:
-        parse_map(map, "wrong_map.txt")
+        parse_map(map, "challenger_map.txt")
     except MapParseError as e:
         print(f"Error. {e}")
         exit(1)

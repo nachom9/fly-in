@@ -46,15 +46,6 @@ class Map:
                         print(f"({x}, {y})", end=' ')
                 else:
                     print("      ", end=' ')
-    def has_exit(self, zone):
-        if "goal" in zone.name:
-            return True
-        elif zone.name not in self.connections.keys():
-            return False
-        for z in self.connections[zone.name]:
-            result = self.has_exit(self.n_zones[z])
-            if result == True:
-                return True
 
 
     def shortest_path(self, start):
@@ -103,13 +94,12 @@ class Map:
             if moves_to.zone_type == "restricted":
                 self.r_zones[moves_to] = (drone, moves_from)
                 moves_to.drones[drone] = False
-                print(f"{self.colors[moves_to.color]}{drone}{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
+                print(f"{self.colors[moves_to.color]}{drone}-{moves_from.name}-{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
             else:
                 moves_to.drones[drone] = True
-                print(f"{self.colors[moves_to.color]}{drone}{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
+                print(f"{self.colors[moves_to.color]}{drone}-{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
         else:
-            moves_to.drones[drone] = True
-            print(f"{self.colors[moves_to.color]}{drone}{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
+            print(f"{self.colors[moves_to.color]}{drone}-{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
 
     def empty_zone(self, zone):
         for drone in list(zone.drones.keys()):
@@ -133,7 +123,7 @@ class Map:
         }
         for moves_to, (drone, moves_from) in self.r_zones.items():
             self.move_drone(moves_from= None, moves_to = moves_to, drone = drone)
-            if self.connections[moves_from.name][moves_to.name] != -1:
+            if self.connections[moves_from.name][moves_to.name] > 0:
                 self.connections[moves_from.name][moves_to.name] -= 1
         self.r_zones = {}
 
