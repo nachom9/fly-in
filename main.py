@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from parse import Map, parse_map, MapParseError
-from show import Screen, TerminalOutput
 
 def main():
     map = Map()
@@ -10,8 +9,8 @@ def main():
     except MapParseError as e:
         print(f"Error. {e}")
         exit(1)
-    except ValueError:
-        print("Error. Invalid map format")
+    except ValueError as e:
+        print(f"Error. {e}")
         exit(1)
     except FileNotFoundError as e:
         print(f"Error. {e}")

@@ -54,7 +54,7 @@ hub: false_hope2 10 0 [zone=priority color=gold max_drones=2]
 hub: false_hope3 11 0 [zone=priority color=gold max_drones=1]
 
 # More dead ends disguised as good paths
-hub: priority_trap1 9 1 [zone=priority color=gold]
+hub: priority_trap1 9 1 [zone=priority color=go5ld]
 hub: priority_trap2 10 1 [zone=priority color=gold]
 hub: priority_dead 11 1 [color=black]
 
@@ -64,11 +64,11 @@ hub: priority_dead2 11 -1 [color=black]
 
 # === LAYER 4: The Convergence Hell ===
 # Multiple restricted paths that must merge
-hub: conv_restricted1 12 2 [zone=restricted color=darkred max_drones=1]
-hub: conv_restricted2 13 2 [zone=restricted color=darkred max_drones=1]
-hub: conv_restricted3 14 2 [zone=restricted color=darkred max_drones=1]
+hub: conv_restricted1 12 2 [zone=restricted color=dar5kred max_drones=1]
+hub: conv_restricted2 13 2 [zone=restricted color=dar5kred max_drones=1]
+hub: conv_restricted3 14 2 [zone=restricted color=dar5kred max_drones=1]
 
-hub: conv_restricted4 12 0 [zone=restricted color=darkred max_drones=1]
+hub: conv_restricted4 12 0 [zone=restricted color=dar5kred max_drones=1]
 hub: conv_restricted5 13 0 [zone=restricted color=darkred max_drones=1]
 hub: conv_restricted6 14 0 [zone=restricted color=darkred max_drones=1]
 
@@ -78,14 +78,14 @@ hub: conv_restricted9 14 -2 [zone=restricted color=darkred max_drones=1]
 
 # === LAYER 5: The Final Gauntlet of Doom ===
 hub: final_merge 15 0 [color=violet max_drones=5]
-hub: final_torture1 16 0 [color=crimson max_drones=2]
+hub: final_torture1 16 0 [color=cri5mson max_drones=2]
 hub: final_torture2 17 0 [color=crimson max_drones=1]
-hub: final_torture3 18 0 [color=crimson max_drones=1]
-hub: final_torture4 19 0 [color=crimson max_drones=1]
+hub: final_torture3 18 0 [color=crim5son max_drones=1]
+hub: final_torture4 19 0 [color=crim5son max_drones=1]
 hub: final_torture5 20 0 [color=crimson max_drones=1]
 
 # The ultimate goal
-end_hub: impossible_goal 21 0 [color=rainbow max_drones=25]
+end_hub: impossible_goal 21 0 [color=purple max_drones=25]
 
 # === CONNECTIONS: The Web of Suffering ===
 
