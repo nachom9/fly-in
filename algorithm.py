@@ -108,10 +108,7 @@ class Map:
                 moves_to.drones[drone] = True
                 print(f"{self.colors[moves_to.color]}{drone}{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
         else:
-            if moves_to.zone_type == "restricted":
-                moves_to.drones[drone] = False
-            else:
-                moves_to.drones[drone] = False
+            moves_to.drones[drone] = True
             print(f"{self.colors[moves_to.color]}{drone}{moves_to.name}{self.colors['reset']}", sep='-', end=' ')
 
     def empty_zone(self, zone):
