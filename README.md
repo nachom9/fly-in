@@ -13,7 +13,6 @@ The goal is to simulate how drones move from a start hub to an end hub, respecti
 
 The program parses a custom map file, computes optimal paths, and simulates drone movements turn by turn until all drones reach the goal.
 
----
 ## Instructions
 ### Installation
 
@@ -26,7 +25,6 @@ Create a virtual environment and install dependencies:
 
 make install  
 
----
 
 ### Usage
 
@@ -43,13 +41,11 @@ Run with a custom map:
 ```bash
 make run MAP=your_map.txt  
 ```
----
 
 ### Debug
 ```bash
 make debug MAP=your_map.txt  
 ```
----
 
 ### Linting
 ```bash
@@ -59,13 +55,11 @@ Strict mode:
 ```bash
 make lint-strict  
 ```
----
 
 ### Clean
 ```bash
 make clean  
 ```
----
 
 ## Algorithm & Implementation
 
@@ -81,7 +75,6 @@ Costs are adjusted based on:
 
 This allows drones to avoid congestion and distribute across multiple paths.
 
----
 
 ### Movement Simulation
 
@@ -93,7 +86,6 @@ The simulation runs in discrete turns:
 
 Connection capacities are temporarily updated each turn.
 
----
 
 ### Constraints Handling
 
@@ -102,7 +94,6 @@ Connection capacities are temporarily updated each turn.
 - Blocked zones (cannot be entered)  
 - Restricted zones (delayed movement behavior)  
 
----
 
 ## Visual Representation
 
@@ -119,7 +110,6 @@ This allows:
 - Easy identification of congestion
 - Better understanding of simulation progress
 
----
 
 ## Features
 
@@ -133,7 +123,6 @@ This allows:
 - Type hints with full mypy compliance  
 - Makefile automation  
 
----
 
 ## File Format
 
@@ -155,7 +144,6 @@ The map file defines the simulation structure using a simple line-based format.
   - `[max_drones=...]`
   - `[max_link=...]` (for connections)
 
----
 
 ### Example Map
 ```bash
@@ -170,7 +158,6 @@ connection: A-B
 connection: B-C [max_link=2]  
 connection: C-D  
 ```
----
 
 ### Explanation
 
@@ -192,15 +179,14 @@ connection: C-D
   - `C-D`: final connection to the end
 ## Resources
 
-### References
+## References
 
 - Python typing: https://docs.python.org/3/library/typing.html  
 - PEP 257: https://peps.python.org/pep-0257/  
 - Dijkstra Algorithm: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm  
 
----
 
-### AI Usage
+## AI Usage
 
 AI (ChatGPT) was used as a support tool for:
 
