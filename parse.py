@@ -103,7 +103,9 @@ def parse_map(map: "Map", map_name: str) -> None:
                         x = int(data[1])
                         y = int(data[2])
                     except Exception:
-                        raise ValueError(f"Line {line_count}. Wrong format.")
+                        raise ValueError(f"Line {line_count}. Wrong format")
+                    if x < 0 or y < 0:
+                        raise ValueError(f"Line {line_count}. Negative coordinates")
                     if (x, y) in map.zones:
                         raise MapParseError(
                             f"Line {line_count}."
@@ -136,7 +138,7 @@ def parse_map(map: "Map", map_name: str) -> None:
                                 metadata.strip('[]').split('=', 1)[1])
                         except Exception:
                             raise ValueError(
-                                f"Line {line_count}. Wrong format.")
+                                f"Line {line_count}. Wrong format")
                         zone_a, zone_b = zones.strip().split('-')
                     else:
                         zone_a, zone_b = value.strip().split('-')
@@ -147,7 +149,7 @@ def parse_map(map: "Map", map_name: str) -> None:
                     else:
                         if not map.start or not map.end:
                             raise ZoneNotFoundError(
-                                "Map must have both start and end zones.")
+                                "Map must have both start and end zones")
                         raise InvalidConnectionError(
                             f"Connection {zone_a}-{zone_b} not possible")
                     if max_link < 1:
@@ -157,14 +159,14 @@ def parse_map(map: "Map", map_name: str) -> None:
                     try:
                         map.drones = int(value)
                     except Exception:
-                        raise ValueError(f"Line {line_count}. Wrong format.")
+                        raise ValueError(f"Line {line_count}. Wrong format")
                 elif line[0] != '#':
                     raise MapParseError(f"Line {line_count}. Wrong format")
             elif line and line[0] != '#':
                 raise MapParseError(f"Line {line_count}. Wrong format")
             line_count += 1
     if not map.start or not map.end:
-        raise ZoneNotFoundError("Map must have both start and end zones.")
+        raise ZoneNotFoundError("Map must have both start and end zones")
     if not map.zones:
         raise MapParseError("Map has no zones")
     if not map.connections:
