@@ -170,7 +170,7 @@ connection: A-B
 connection: B-C [max_link=2]  
 connection: C-D  
 
----
+---------
 
 ### Explanation
 
