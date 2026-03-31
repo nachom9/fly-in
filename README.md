@@ -62,6 +62,7 @@ make lint-strict
 ```bash
 make clean  
 ```
+---
 
 ## Algorithm & Implementation
 
@@ -96,6 +97,7 @@ Connection capacities are temporarily updated each turn.
 - Blocked zones (cannot be entered)  
 - Restricted zones (delayed movement behavior)  
 
+---
 
 ## Visual Representation
 
@@ -112,6 +114,7 @@ This allows:
 - Easy identification of congestion
 - Better understanding of simulation progress
 
+---
 
 ## Features
 
@@ -125,6 +128,7 @@ This allows:
 - Type hints with full mypy compliance  
 - Makefile automation  
 
+---
 
 ## File Format
 
@@ -179,14 +183,16 @@ connection: C-D
   - `A-B`: simple connection with default capacity of 1
   - `B-C [max_link=2]`: connection with higher capacity
   - `C-D`: final connection to the end
-## Resources
 
-## References
+---
+
+## Resources
 
 - Python typing: https://docs.python.org/3/library/typing.html  
 - PEP 257: https://peps.python.org/pep-0257/  
 - Dijkstra Algorithm: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm  
 
+---
 
 ## AI Usage
 
