@@ -6,6 +6,18 @@ import sys
 
 
 def main() -> None:
+    """
+    Entry point of the Fly-In Drones simulator.
+
+    This function:
+    - Validates command-line arguments.
+    - Parses the input map file.
+    - Computes the shortest path from start to end.
+    - Executes simulation turns until all drones reach the goal.
+
+    Raises:
+        SystemExit: If any error occurs during parsing or execution.
+    """
     if len(sys.argv) != 2:
         print("Usage: python fly-in.py <map_file>")
         sys.exit(1)
