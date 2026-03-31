@@ -158,7 +158,7 @@ The map file defines the simulation structure using a simple line-based format.
 ---
 
 ### Example Map
-
+```bash
 nb_drones: 3  
 
 start_hub: A 0 0 [color=green]  
@@ -169,8 +169,8 @@ end_hub: D 3 0
 connection: A-B  
 connection: B-C [max_link=2]  
 connection: C-D  
-
----------
+```
+---
 
 ### Explanation
 
