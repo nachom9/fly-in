@@ -17,7 +17,7 @@ class Map:
         self.connections: Dict[str, Dict[str, int]] = {}
 
         self.drones: int = 0
-        self.path: list[Zone] = []
+        self.path: Optional[list[Zone]] = []
 
         self.start: Optional[Zone] = None
         self.end: Optional[Zone] = None
@@ -71,8 +71,7 @@ class Map:
                     queue.append((new_cost, next_zone))
                     parents[next_name] = zone
                     best_cost[next_name] = new_cost
-
-        current = self.end
+        current = zone
         try:
             while current != start:
                 path.append(current)
