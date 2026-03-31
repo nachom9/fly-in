@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 
-from parse import Map, parse_map, MapParseError
+from parse import parse_map, MapParseError
+from algorithm import Map
 
-def main():
+
+def main() -> None:
     map = Map()
     try:
         parse_map(map, "challenger_map.txt")
-    except MapParseError as e:
-        print(f"Error. {e}")
-        exit(1)
-    except ValueError as e:
-        print(f"Error. {e}")
-        exit(1)
-    except FileNotFoundError as e:
+    except (MapParseError, ValueError, FileNotFoundError) as e:
         print(f"Error. {e}")
         exit(1)
     try:
-        map.path = map.shortest_path(map.start)
+        path = map.shortest_path(map.start)
+        map.path = path
     except KeyError:
         print("Error. No solution")
         exit(1)

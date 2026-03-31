@@ -33,7 +33,7 @@ debug: install
 
 lint:
 	@echo "Running flake8 and mypy..."
-	@$(VENV)/bin/flake8 .
+	@$(VENV)/bin/flake8 . --exclude venv
 	@$(VENV)/bin/mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
 
 lint-strict:
