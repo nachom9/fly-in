@@ -61,6 +61,8 @@ class Map:
                 if zone.max_drones != self.drones:
                     pen = (self.drones -
                            (next_zone.max_drones - len(next_zone.drones)))
+                    if next_zone.zone_type == 'priority':
+                        pen -= 1
                 if next_zone.zone_type == 'restricted':
                     next_cost = 2 * pen
                 else:

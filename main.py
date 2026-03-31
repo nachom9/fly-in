@@ -6,10 +6,10 @@ import sys
 
 
 def main() -> None:
-    if len(sys.argv) < 2:
+    if len(sys.argv) != 2:
         print("Usage: python fly-in.py <map_file>")
         sys.exit(1)
-    
+
     map = Map()
 
     try:

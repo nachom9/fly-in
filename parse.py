@@ -104,8 +104,6 @@ def parse_map(map: "Map", map_name: str) -> None:
                         y = int(data[2])
                     except Exception:
                         raise ValueError(f"Line {line_count}. Wrong format")
-                    if x < 0 or y < 0:
-                        raise ValueError(f"Line {line_count}. Negative coordinates")
                     if (x, y) in map.zones:
                         raise MapParseError(
                             f"Line {line_count}."

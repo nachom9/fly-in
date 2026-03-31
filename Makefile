@@ -6,6 +6,7 @@ MAIN_FILE = main.py
 REQUIREMENTS = requirements.txt
 
 all: banner run
+MAP ?= map.txt
 
 banner:
 	@echo "======================================"
@@ -25,11 +26,11 @@ $(VENV)/bin/activate: $(REQUIREMENTS)
 
 run: install
 	@echo "Running Fly-In Simulator..."
-	$(PYTHON) $(MAIN_FILE)
+	$(PYTHON) $(MAIN_FILE) $(MAP)
 
 debug: install
 	@echo "Running Fly-In Simulator in debug mode..."
-	$(PYTHON) -m pdb $(MAIN_FILE)
+	$(PYTHON) -m pdb $(MAIN_FILE) $(MAP)
 
 lint:
 	@echo "Running flake8 and mypy..."
