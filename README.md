@@ -31,39 +31,40 @@ make install
 ## Usage
 
 Run the simulator:
-
+```bash
 make run  
+```
 
 By default, it uses:
 
 map.txt  
 
 Run with a custom map:
-
+```bash
 make run MAP=your_map.txt  
-
+```
 ---
 
 ## Debug
-
+```bash
 make debug MAP=your_map.txt  
-
+```
 ---
 
 ## Linting
-
+```bash
 make lint  
-
+```
 Strict mode:
-
+```bash
 make lint-strict  
-
+```
 ---
 
 ## Clean
-
+```bash
 make clean  
-
+```
 ---
 
 ## Algorithm & Implementation
@@ -109,7 +110,7 @@ The simulation outputs drone movements in the terminal.
 
 Each turn prints movements like:
 
-D1-A-B D2-A-C  
+D1-A-B D2-C  
 
 Colors are used via ANSI escape codes to improve readability.
 
@@ -141,7 +142,6 @@ This allows:
 - Python typing: https://docs.python.org/3/library/typing.html  
 - PEP 257: https://peps.python.org/pep-0257/  
 - Dijkstra Algorithm: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm  
-- Graph Theory: https://en.wikipedia.org/wiki/Graph_theory  
 
 ---
 
