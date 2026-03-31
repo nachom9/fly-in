@@ -14,7 +14,8 @@ The goal is to simulate how drones move from a start hub to an end hub, respecti
 The program parses a custom map file, computes optimal paths, and simulates drone movements turn by turn until all drones reach the goal.
 
 ---
-
+### Instructions
+----
 ## Installation
 
 Clone the repository:
