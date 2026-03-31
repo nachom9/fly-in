@@ -15,7 +15,6 @@ The program parses a custom map file, computes optimal paths, and simulates dron
 
 ---
 ## Instructions
-----
 ### Installation
 
 Clone the repository:
